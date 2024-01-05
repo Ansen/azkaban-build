@@ -15,7 +15,7 @@ jobs:
           token: ${{ secrets.PAT }}
       - name: Get the latest version of Azkaban
         run: |
-          curl -s https://api.github.com/repos/azkaban/azkaban/releases | jq -r '[.[] | select(.prerelease == false)][0] | .tag_name[1:]' > version
+          curl -s https://api.github.com/repos/azkaban/azkaban/releases | jq -r '[.[] | select(.prerelease == false)][0] | .tag_name' > version
           echo "AZKABAN_VERSION=$(cat version)" >> $GITHUB_ENV
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9.1.1
