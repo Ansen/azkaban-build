@@ -49,6 +49,7 @@ jobs:
 
       - name: Calculate SHA256 checksum
         run: |
+          ls -al
           for filename in azkaban-*; do shasum -a 256 ${filename} | tee ${filename}.sha256 ; done
         shell: bash
         working-directory: azkaban/releasefiles
