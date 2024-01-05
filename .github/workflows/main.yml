@@ -37,7 +37,7 @@ jobs:
           export JAVA_HOME="$PWD/jdk1.8.0_391"
           sed -i 's#https://nodejs.org/dist#https://mirrors.dotsrc.org/nodejs/release#g'  azkaban-web-server/build.gradle
           ./gradlew build -x test -Pversion=3.8.22
-          if [[ $? -ne 0 ]]
+          if [[ $? -eq 0 ]]
           then
             for x in $(find -maxdepth 4 -type f -name 'azkaban-*0.1.0-SNAPSHOT.zip' -o -name 'azkaban-*0.1.0-SNAPSHOT.tar.gz')
             do
