@@ -38,6 +38,7 @@ jobs:
           /bin/bash ../patch.sh
           ./gradlew build -x test
           if [[ $? -eq 0 ]]
+          then
             for x in $(find -maxdepth 3 -type d -name 'distributions')
             do
               cp ${x}/* releasefiles/
