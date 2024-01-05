@@ -1,0 +1,24 @@
+name: Check latest Azkaban version
+
+on:
+  schedule:
+    - cron: '15 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  version_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+        with:
+          token: ${{ secrets.PAT }}
+      - name: Get the latest version of Azkaban
+        run: |
+          curl -s https://api.github.com/repos/azkaban/azkaban/releases | jq -r '[.[] | select(.prerelease == false)][0] | .tag_name[1:]' > version
+          echo '3.81.0' > version
+          echo "AZKABAN_VERSION=$(cat version)" >> $GITHUB_ENV
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v9.1.1
+        with:
+          message: 'Version updated to: ${{ env.AZKABAN_VERSION }}'

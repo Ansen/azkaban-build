@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: azkaban Community Support
+    url: https://github.com/azkaban/azkaban
+    about: Please ask and answer questions related to azkaban errors here.
