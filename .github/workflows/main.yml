@@ -37,10 +37,15 @@ jobs:
           export JAVA_HOME="$PWD/jdk1.8.0_391"
           /bin/bash ../patch.sh
           ./gradlew build -x test
-          for x in $(find -maxdepth 4 -type f -name 'azkaban-*${{ env.AZKABAN_VERSION }}-SNAPSHOT.zip' -o -name 'azkaban-*${{ env.AZKABAN_VERSION }}-SNAPSHOT.tar.gz')
-          do
-            cp $x releasefiles/
-          done
+          if [[ $? -eq 0 ]]
+            for x in $(find -maxdepth 3 -type d -name 'distributions')
+            do
+              cp ${x}/* releasefiles/
+            done
+          else
+            echo "build failed"
+            exit 1
+          fi
         shell: bash
         working-directory: azkaban
 
