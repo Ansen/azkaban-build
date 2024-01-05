@@ -36,10 +36,10 @@ jobs:
           tar -xf jdk.tar.gz
           export JAVA_HOME="$PWD/jdk1.8.0_391"
           /bin/bash ../patch.sh
-          ./gradlew build -x test -Pversion=3.8.22
+          ./gradlew build -x test
           if [[ $? -eq 0 ]]
           then
-            for x in $(find -maxdepth 4 -type f -name 'azkaban-*0.1.0-SNAPSHOT.zip' -o -name 'azkaban-*0.1.0-SNAPSHOT.tar.gz')
+            for x in $(find -maxdepth 4 -type f -name 'azkaban-*${{ env.AZKABAN_VERSION }}-SNAPSHOT.zip' -o -name 'azkaban-*${{ env.AZKABAN_VERSION }}-SNAPSHOT.tar.gz')
             do
               cp $x releasefiles/
             done
