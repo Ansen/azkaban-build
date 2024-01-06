@@ -2,7 +2,7 @@ name: Check latest Azkaban version
 
 on:
   schedule:
-    - cron: '15 6 */3 * *'
+    - cron: '15 6 1 */3 *'
   workflow_dispatch:
 
 jobs:
